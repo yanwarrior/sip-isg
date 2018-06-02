@@ -1,0 +1,18 @@
+<!-- ko if: errorXHR() -->
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button data-bind="click: clearErrorXHR" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+    <h4>Validasi</h4>
+    <!-- ko if: ('customer' in errorXHR()) -->
+    <strong>Customer</strong>
+    <ul data-bind="foreach: errorXHR().customer" class="list-unstyled">
+        <li data-bind="text: $data"></li>
+    </ul>
+    <!-- /ko -->
+    <!-- ko if: ('items' in errorXHR()) -->
+    <strong>Items</strong>
+    <ul data-bind="foreach: errorXHR().items" class="list-unstyled">
+        <li data-bind="text: $data"></li>
+    </ul>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

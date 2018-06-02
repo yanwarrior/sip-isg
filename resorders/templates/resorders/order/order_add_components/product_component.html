@@ -1,0 +1,54 @@
+<div class="col-md-4">
+    <table class="table table-bordered table-condensed">
+        <thead>
+            <tr class="success">
+                <th colspan="4">Product</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <td>Search</td>
+                <td colspan="3">
+                    <input data-bind="event: {keypress: searchProducts}" type="text" class="form-control input-sm">
+                </td>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <td colspan="4">
+                    <span data-bind="visible: productPaginationPrev()">
+                        <button data-bind="click: paginateProducts, attr: {'data-page': productPaginationPrev()}" class="btn btn-sm btn-primary">Prev</button>
+                    </span>
+                    <span data-bind="visible: !productPaginationPrev()">
+                        <button class="btn btn-sm btn-default">Prev</button>
+                    </span>
+                    <span data-bind="visible: productPaginationNext()">
+                        <button data-bind="click: paginateProducts, attr: {'data-page': productPaginationNext()}" class="btn btn-sm btn-primary">Next</button>
+                    </span>
+                    <span data-bind="visible: !productPaginationNext()">
+                        <button class="btn btn-sm btn-default">Next</button>
+                    </span>
+                </td>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th colspan="2">Stock</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: products">
+            <tr>
+                <td data-bind="text: name"></td>
+                <td data-bind="text: price"></td>
+                <td data-bind="text: stock"></td>
+                <td>
+                    <button class="btn btn-default btn-sm" data-bind="click: $root.selectProduct">
+                        <i class="glyphicon glyphicon-share"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

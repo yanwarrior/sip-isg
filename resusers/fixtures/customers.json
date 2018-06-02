@@ -1,0 +1,50 @@
+[
+    {
+        "model": "resusers.customer",
+        "pk": 1,
+        "fields": {
+            "name": "Mafaza",
+            "email": "mafaza@gmail.com"
+        }
+    },
+    {
+        "model": "resusers.customer",
+        "pk": 2,
+        "fields": {
+            "name": "Hilya",
+            "email": "hilya@gmail.com"
+        }
+    },
+    {
+        "model": "resusers.customer",
+        "pk": 3,
+        "fields": {
+            "name": "Aiza",
+            "email": "aiza@gmail.com"
+        }
+    },
+    {
+        "model": "resusers.customer",
+        "pk": 4,
+        "fields": {
+            "name": "Nuha",
+            "email": "nuha@gmail.com"
+        }
+    },
+    {
+        "model": "resusers.customer",
+        "pk": 5,
+        "fields": {
+            "name": "Marzia",
+            "email": "marzia@gmail.com"
+        }
+    },
+    {
+        "model": "resusers.customer",
+        "pk": 6,
+        "fields": {
+            "name": "Azura",
+            "email": "azura@gmail.com"
+        }
+    }
+]

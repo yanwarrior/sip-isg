@@ -1,0 +1,78 @@
+<div class="col-md-5">
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr class="warning">
+                <th colspan="6">Items</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th colspan="2">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody data-bind="visible: items, foreach: items">
+            <tr>
+                <td data-bind="text: product().name()"></td>
+                <td data-bind="text: product().stock()"></td>
+                <td data-bind="text: price"></td>
+                <td>
+                    <input type="text" data-bind="value: quantity" class="form-control input-sm">
+                </td>
+                <td data-bind="text: subtotal"></td>
+                <td>
+                    <button data-bind="click: $root.removeItem" class="btn btn-sm btn-flat btn-flat-danger">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td colspan="2">Customer</td>
+                <td colspan="4">
+                    <!-- ko if: selectedCustomer -->
+                    <a href="#" data-bind="click: showPopupCustomerList">
+                        <span class="lable label-warning" data-bind="text: selectedCustomer().email"></span>
+                    </a>
+                    <!-- /ko -->
+                    <!-- ko ifnot: selectedCustomer -->
+                    <a href="#" data-bind="click: showPopupCustomerList">
+                        <small><i class="glyphicon glyphicon-search"></i></small>
+                    </a>
+                    <!-- /ko -->
+                </td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td colspan="2">Grand Total</td>
+                <td colspan="4" data-bind="text: order().total"></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td colspan="2">Payment</td>
+                <td colspan="4">
+                    <input type="text" data-bind="value: order().payment" class="form-control input-sm">
+                </td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td colspan="2">Balance</td>
+                <td colspan="4" data-bind="text: order().balance"></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td colspan="6">
+                    <button data-bind="click: save" class="btn btn-sm btn-primary btn-block">Finish</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

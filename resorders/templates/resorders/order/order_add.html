@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Order Add{% endblock %}
+
+{% block content %}
+    {% include 'resorders/order/order_add_components/alert.html' %}
+    {% include 'resorders/order/order_add_components/category_component.html' %}
+    {% include 'resorders/order/order_add_components/product_component.html' %}
+    {% include 'resorders/order/order_add_components/item_component.html' %}
+    {% include 'resorders/order/order_add_components/popup_customer_list.html' %}
+{% endblock %}
+
+{% block script %}
+    <script>{% include 'resorders/order/order_add.js' %}</script>
+{% endblock %}

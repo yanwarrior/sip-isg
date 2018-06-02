@@ -1,0 +1,72 @@
+[
+  {
+    "model": "resproducts.product",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "Baju Anak Biru",
+      "price": 20000,
+      "stock": 100
+    }
+  },
+  {
+    "model": "resproducts.product",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "name": "Baju Anak Kuning",
+      "price": 20000,
+      "stock": 100
+    }
+  },
+  {
+    "model": "resproducts.product",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "name": "Baju Anak Merah",
+      "price": 20000,
+      "stock": 100
+    }
+  },
+  {
+    "model": "resproducts.product",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "name": "Baju Anak Hijau",
+      "price": 20000,
+      "stock": 100
+    }
+  },
+  {
+    "model": "resproducts.product",
+    "pk": 5,
+    "fields": {
+      "category": 2,
+      "name": "Baju Dewasa Merah",
+      "price": 34000,
+      "stock": 100
+    }
+  },
+  {
+    "model": "resproducts.product",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "name": "Baju Dewasa Kuning",
+      "price": 34000,
+      "stock": 100
+    }
+  },
+  {
+    "model": "resproducts.product",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "name": "Baju Dewasa Hijau",
+      "price": 34000,
+      "stock": 100
+    }
+  }
+]

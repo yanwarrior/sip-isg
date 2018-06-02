@@ -1,0 +1,55 @@
+<div class="col-md-3">
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr class="success">
+                <th colspan="3">Category</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <td>Search</td>
+                <td colspan="2"><input data-bind="event: {keypress: searchCategories}" type="text" class="form-control input-sm"></td>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <td colspan="3">
+                    <span data-bind="visible: categoryPaginationPrev()">
+                        <button data-bind="click: paginateCategories, attr: {'data-page': categoryPaginationPrev()}" class="btn btn-sm btn-primary">Prev</button>
+                    </span>
+                    <span data-bind="visible: !categoryPaginationPrev()">
+                        <button class="btn btn-sm btn-default">Prev</button>
+                    </span>
+                    <span data-bind="visible: categoryPaginationNext()">
+                        <button data-bind="click: paginateCategories, attr: {'data-page': categoryPaginationNext()}" class="btn btn-sm btn-primary">Next</button>
+                    </span>
+                    <span data-bind="visible: !categoryPaginationNext()">
+                        <button class="btn btn-sm btn-default">Next</button>
+                    </span>
+                </td>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th colspan="2">Name</th>
+            </tr>
+        </thead>
+        <tbody data-bind="visible: categories().length > 0, foreach: categories">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: name"></td>
+                <td>
+                    <button data-bind="click: $root.selectCategory" class="btn btn-sm btn-default">
+                        <i class="glyphicon glyphicon-share"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tbody data-bind="visible: categories().length === 0">
+            <tr>
+                <td colspan="3">Data tidak ada.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
