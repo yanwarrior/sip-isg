@@ -64,3 +64,13 @@ class ItemAddForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = ('product', 'price', 'quantity', 'subtotal')
+
+    def clean_quantity(self):
+        product = self.cleaned_data['product']
+        quantity = self.cleaned_data['quantity']
+        if product.stock < quantity:
+            raise forms.ValidationError("Stok '{}' tidak mencukupi".format(product.name))
+        return quantity
+
+    # def clean(self):
+

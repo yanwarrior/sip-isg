@@ -7,6 +7,8 @@ from django.shortcuts import render
 from resproducts.models import Category, Product
 
 
+
+
 def ajax_category_list(request):
     categories = Category.objects.all()
     page = request.GET.get('page', 1)

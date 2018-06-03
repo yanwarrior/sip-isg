@@ -10,7 +10,7 @@ ko.extenders.validateItemQuantity = function (target, option) {
 
 
 function itemIsAvailable(items, product) {
-    var find = items.find(function (elem) {
+    let find = items.find(function (elem) {
        return elem.product.id === product.id;
     });
 
@@ -249,6 +249,7 @@ function OrderAddViewModel() {
                 console.log(resp);
             },
             error: function (resp, status, request) {
+                console.log(resp.responseJSON);
                 self.errorXHR(resp.responseJSON);
                 console.log(self.errorXHR());
             }
@@ -258,6 +259,8 @@ function OrderAddViewModel() {
     self.clearErrorXHR = function (data, event) {
         self.errorXHR(null);
     };
+
+
 
     self.guideFinishButton = function () {
         if ((self.items().length > 0) &&
