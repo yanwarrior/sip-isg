@@ -1,12 +1,20 @@
 import json
 
+from django.db import transaction
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from resorders.forms import OrderAddForm
+from resorders.forms import OrderAddForm, ItemAddForm
+from resusers.models import Customer
 
+
+def order_list(request):
+    pass
+
+def order_confirm_add(request):
+    pass
 
 def order_add(request):
     context = {
@@ -19,14 +27,26 @@ def order_add(request):
 
 
 @csrf_exempt
+@transaction.atomic
 def ajax_order_add(request):
     if request.is_ajax() and request.method == 'POST':
         json_body = json.loads(request.body.decode('utf-8'))
         form = OrderAddForm(json_body)
+        items_form = [ItemAddForm(obj) for obj in json_body.get('items')]
 
-        if form.is_valid():
-            return JsonResponse(json.loads(request.body.decode('utf-8')), safe=False)
-        return JsonResponse(form.errors, safe=False, status=400)
+        if form.is_valid() and all([item_form.is_valid for item_form in items_form]):
+            with transaction.atomic():
+                order = form.save()
+                for item_form in items_form:
+                    item = item_form.save(commit=False)
+                    item.product.stock = item.product.stock - item.quantity
+                    item.product.save()
+                    item.order = order
+                    item.save()
+
+            return JsonResponse(json_body)
+        else:
+            return JsonResponse({"kesalahan": "Terjadi kesalahan saat melakukan order."}, status=400)
 
     else:
         pass

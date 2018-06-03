@@ -34,12 +34,12 @@
             <tr>
                 <td colspan="2">Customer</td>
                 <td colspan="4">
-                    <!-- ko if: selectedCustomer -->
+                    <!-- ko if: order().customer() -->
                     <a href="#" data-bind="click: showPopupCustomerList">
-                        <span class="lable label-warning" data-bind="text: selectedCustomer().email"></span>
+                        <span class="lable label-warning" data-bind="text: order().customer().email"></span>
                     </a>
                     <!-- /ko -->
-                    <!-- ko ifnot: selectedCustomer -->
+                    <!-- ko ifnot: order().customer() -->
                     <a href="#" data-bind="click: showPopupCustomerList">
                         <small><i class="glyphicon glyphicon-search"></i></small>
                     </a>
@@ -70,7 +70,12 @@
         <tbody>
             <tr>
                 <td colspan="6">
+                    <!-- ko if: guideFinish -->
                     <button data-bind="click: save" class="btn btn-sm btn-primary btn-block">Finish</button>
+                    <!-- /ko -->
+                    <!-- ko ifnot: guideFinish -->
+                    <button class="btn btn-sm btn-default btn-block">Finish</button>
+                    <!-- /ko -->
                 </td>
             </tr>
         </tbody>

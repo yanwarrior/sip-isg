@@ -14,5 +14,11 @@
         <li data-bind="text: $data"></li>
     </ul>
     <!-- /ko -->
+    <!-- ko if: ('order' in errorXHR()) -->
+    <strong>Order</strong>
+    <ul data-bind="foreach: errorXHR().order" class="list-unstyled">
+        <li data-bind="text: $data"></li>
+    </ul>
+    <!-- /ko -->
 </div>
 <!-- /ko -->

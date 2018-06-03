@@ -5,7 +5,7 @@ ko.extenders.validateItemQuantity = function (target, option) {
             target(1);
         }
     });
-    return target;
+    return parseInt(target);
 };
 
 
@@ -41,13 +41,10 @@ function Item(product) {
 
 function Order() {
     this.total = ko.observable(0); // mandatory
+    this.customer = ko.observable(null);
     this.payment = ko.observable(0);
     this.balance = ko.computed(function () {
         let result = this.payment() - this.total();
-        if (result <= 0) {
-            return 0;
-        }
-
         return result;
     }, this);
 }
@@ -57,6 +54,26 @@ function Customer(data) {
     this.id = ko.observable(data.id);
     this.name = ko.observable(data.name);
     this.email = ko.observable(data.email);
+}
+
+
+function PayloadOrder(customer, items, order) {
+    let payload = {
+        customer: customer.id,
+        items: [],
+        total: order.total
+    };
+
+    items.forEach(function (elem) {
+        payload.items.push({
+           product: elem.product.id,
+           price: elem.price,
+           quantity: elem.quantity,
+           subtotal: elem.subtotal
+        });
+    });
+
+    return payload;
 }
 
 
@@ -82,6 +99,7 @@ function OrderAddViewModel() {
     self.customerPaginationPrev = ko.observable();
 
     self.errorXHR = ko.observable(null);
+    self.guideFinish = ko.observable(false);
 
     self.getCategories = function () {
         $.ajax({
@@ -154,7 +172,7 @@ function OrderAddViewModel() {
     self.paginateCustomers = function (data, event) {
         self.customerQuery().page = event.target.dataset.page;
         self.getCustomers();
-    }
+    };
 
     self.searchCategories = function (data, event) {
         if (event.charCode === 13) {
@@ -193,6 +211,7 @@ function OrderAddViewModel() {
 
     self.selectCustomer = function (data, event) {
         self.selectedCustomer(data);
+        self.order().customer(data);
     };
 
     self.updateOrder = function () {
@@ -215,15 +234,10 @@ function OrderAddViewModel() {
     };
 
     self.save = function (data, event) {
-        console.log(ko.toJS(self.items));
-        console.log(ko.toJS(self.selectedCustomer));
-        console.log(ko.toJS(self.order));
-
-        let payload = {
-            items: ko.toJS(self.items),
-            customer: ko.toJS(self.selectedCustomer),
-            order: ko.toJS(self.order)
-        };
+        let payload = PayloadOrder(
+            ko.toJS(self.selectedCustomer),
+            ko.toJS(self.items),
+            ko.toJS(self.order));
 
         $.ajax({
             url: '{{ url_ajax_order_add }}',
@@ -245,10 +259,22 @@ function OrderAddViewModel() {
         self.errorXHR(null);
     };
 
+    self.guideFinishButton = function () {
+        if ((self.items().length > 0) &&
+            (self.selectedCustomer() !== null) &&
+            (self.order().payment() !== 0) &&
+            (self.order().balance() >= 0)) {
+            self.guideFinish(true);
+        } else {
+            self.guideFinish(false);
+        }
+    };
+
     ko.computed(function () {
         self.getCategories();
         self.getProducts();
         self.updateOrder();
+        self.guideFinishButton();
     }, self);
 }
 
